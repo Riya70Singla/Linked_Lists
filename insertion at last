@@ -1,0 +1,53 @@
+#include <stdio.h>
+#include<stdlib.h>
+struct Node{
+
+    int data;
+struct Node *next;
+};
+void push(struct Node** head_ref,int d)
+{
+    struct Node* head=(struct Node*)malloc(sizeof(struct Node));
+    head->data=d;
+    head->next=(*head_ref);
+    (*head_ref)=head;
+}
+void append(struct Node* head_ref,int d)
+{
+    struct Node* head=(struct Node*)malloc(sizeof(struct Node));
+struct Node* last=head_ref;
+while(last->next!=NULL)
+{
+last=last->next;} 
+last->next=head; 
+ head->data=d;
+    head->next=NULL;
+}
+
+void print(struct Node* head)
+{
+while(head!=NULL)
+{
+ printf("%d\n",head->data);
+ head=head->next;
+}
+}
+int main(int argc,char* argv[])
+{
+struct Node* head=NULL;
+int arr[20],n=0;
+for(int i=1;i<argc-1;i++)
+{
+    arr[i-1]=atoi(argv[i]);
+    n++;
+}
+for(int i=n-1;i>=0;i--)
+{
+    push(&head,arr[i]);
+}
+int h=atoi(argv[argc-1]);
+append(head,h);
+print(head);
+
+    return 0;
+}
